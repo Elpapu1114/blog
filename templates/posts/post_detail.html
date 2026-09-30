@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ post.title }} | Blog de Manuel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'blog.css' %}">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">MMM<span>_</span></a>
+    <nav aria-label="Navegación principal"><a href="/">Portfolio</a><a class="active" href="{% url 'post_list' %}">Blog</a></nav>
+  </header>
+  <main class="wrap article-wrap">
+    <a class="back-link" href="{% url 'post_list' %}">← Todas las entradas</a>
+    <article class="article">
+      <p class="eyebrow">{{ post.published_at|date:"d \d\e F \d\e Y" }}</p>
+      <h1>{{ post.title }}</h1>
+      <div class="article-body">{{ post.body|linebreaks }}</div>
+      {% if post.media %}
+        <div class="media-frame">
+          {% with file_url=post.media.url|lower %}
+            {% if ".mp4" in file_url or ".webm" in file_url or ".ogg" in file_url %}
+              <video controls preload="metadata"><source src="{{ post.media.url }}">Tu navegador no puede reproducir este video.</video>
+            {% elif ".mp3" in file_url or ".wav" in file_url or ".m4a" in file_url %}
+              <audio controls><source src="{{ post.media.url }}">Tu navegador no puede reproducir este audio.</audio>
+            {% elif ".jpg" in file_url or ".jpeg" in file_url or ".png" in file_url or ".gif" in file_url or ".webp" in file_url %}
+              <img src="{{ post.media.url }}" alt="Multimedia de {{ post.title }}">
+            {% else %}
+              <a class="read-more" href="{{ post.media.url }}" target="_blank" rel="noopener">Abrir archivo multimedia <span aria-hidden="true">↗</span></a>
+            {% endif %}
+          {% endwith %}
+        </div>
+      {% endif %}
+    </article>
+    <section class="comments" aria-labelledby="comments-title">
+      <h2 id="comments-title">Comentarios <span>({{ comments|length }})</span></h2>
+      {% for comment in comments %}
+        <article class="comment"><p class="comment-meta">{{ comment.name }} · {{ comment.created_at|date:"d/m/Y H:i" }}</p><p>{{ comment.body|linebreaksbr }}</p></article>
+      {% empty %}
+        <p class="muted">Todavía no hay comentarios.</p>
+      {% endfor %}
+      <form class="comment-form" method="post">
+        {% csrf_token %}
+        <h3>Dejá tu comentario</h3>
+        {% for message in messages %}<p class="notice">{{ message }}</p>{% endfor %}
+        {{ form.non_field_errors }}
+        <label for="{{ form.name.id_for_label }}">Nombre</label>
+        {{ form.name }}{{ form.name.errors }}
+        <label for="{{ form.body.id_for_label }}">Comentario</label>
+        {{ form.body }}{{ form.body.errors }}
+        <button type="submit">Enviar comentario</button>
+      </form>
+    </section>
+  </main>
+  <footer class="site-footer"><a href="/">Volver al portfolio</a></footer>
+</body>
+</html>

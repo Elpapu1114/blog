@@ -1,0 +1,251 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manuel Mañé Mazzieri Portfolio</title>
+  <meta name="description" content="Portfolio personal de Manuel Mañé Mazzieri, estudiante de computacion.">
+
+  <link rel="icon" type="image/png" href="assets/mmmlogo.jpg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+<body>
+
+  <div class="scroll-progress" id="scroll-progress"></div>
+
+  <header class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="#inicio" class="navbar__brand">MMM<span class="cursor">_</span></a>
+
+      <nav class="navbar__links">
+        <a href="#sobre-mi">Sobre mí</a>
+        <a href="#proyectos">Proyectos</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="/blog/">Blog</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema" title="Cambiar tema claro/oscuro">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+    </div>
+  </header>
+
+  <main>
+
+    <section id="inicio" class="hero">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="hero__blob hero__blob--1" aria-hidden="true"></div>
+      <div class="hero__blob hero__blob--2" aria-hidden="true"></div>
+      <div class="hero__grid" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <p class="eyebrow"><span class="eyebrow__dot"></span> Hola, me llamo</p>
+        <h1 class="hero__title">Manuel Mañé Mazzieri</h1>
+        <p class="hero__subtitle">Estudiante de programacion en el Instituto Luis A. Huergo</p>
+        <p class="hero__desc">
+          Hago lo que me piden los profes. Me gusta jugar al futbol y me gusta programar
+        </p>
+        <div class="hero__actions">
+          <a href="#proyectos" class="btn-custom btn-custom--primary">
+            <i class="fa-solid fa-diagram-project"></i> Ver proyectos
+          </a>
+          <a href="#contacto" class="btn-custom btn-custom--outline">
+            <i class="fa-regular fa-paper-plane"></i> Contactame
+          </a>
+        </div>
+      </div>
+
+      <a href="#sobre-mi" class="hero__scroll" aria-label="Bajar a la siguiente sección">
+        <i class="fa-solid fa-chevron-down"></i>
+      </a>
+    </section>
+
+    <section id="sobre-mi" class="section">
+      <p class="eyebrow"><span class="eyebrow__dot"></span> Sobre mí</p>
+      <h2 class="section__title">Quién soy</h2>
+
+      <div class="about">
+        <div class="about__photo">
+          <div class="about__photo-frame">
+            <img src="assets/io.jpg" alt="Foto de perfil de Manuel Mañé Mazzieri">
+          </div>
+        </div>
+        <div class="about__text">
+          <p>
+            Soy estudiante de computacion y me gusta mucho programar juegos
+          </p>
+          <p>
+            Ahora mismo estudio computacion en el huergo y este portfolio es mi trabajo mas reciente
+          </p>
+          <ul class="about__facts">
+            <li><i class="fa-solid fa-location-dot"></i> Buenos Aires, Argentina</li>
+            <li><i class="fa-solid fa-graduation-cap"></i> Especialidad de computadoras</li>
+            <li><i class="fa-solid fa-briefcase"></i> Disponible para laburar</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <section id="proyectos" class="section section--alt">
+      <p class="eyebrow"><span class="eyebrow__dot"></span> // proyectos</p>
+      <h2 class="section__title">Cosas que hice</h2>
+
+      <div class="projects-grid">
+
+        <article class="card-project">
+          <div class="card-project__img-wrap">
+            <img src="assets/fotominigames.jpg" alt="Captura del proyecto Minigames">
+            <span class="card-project__badge">Juego</span>
+          </div>
+          <div class="card-project__body">
+            <h3>Minigames</h3>
+            <p>
+              Juego en el cual hay distintos minijuegos pra jugar solo, con amigos o la ia
+            </p>
+            <ul class="card-project__tags">
+              <li>Python</li>
+              <li>Pygame</li>
+            </ul>
+            <div class="card-project__links">
+              <a href="https://github.com/Elpapu1114/Minigames" target="_blank" rel="noopener">Ver github <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card-project">
+          <div class="card-project__img-wrap">
+            <img src="assets/fotopokemon.jpg" alt="Captura del proyecto Pokemon">
+            <span class="card-project__badge">Juego</span>
+          </div>
+          <div class="card-project__body">
+            <h3>Pokemon</h3>
+            <p>
+              Este juego es una copia al pokemon. En este vas a poder capturar pokemos e intentar ganar en los distintos gimnasios
+            </p>
+            <ul class="card-project__tags">
+              <li>Python</li>
+            </ul>
+            <div class="card-project__links">
+              <a href="https://github.com/Elpapu1114/Tp-Pokemon-PIA" target="_blank" rel="noopener">Ver github <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card-project">
+          <div class="card-project__img-wrap">
+            <img src="assets/fotoporfolio.jpg" alt="Captura de este portfolio">
+            <span class="card-project__badge">Web</span>
+          </div>
+          <div class="card-project__body">
+            <h3>Portfolio</h3>
+            <p>
+              Este es el ultimo trabajo y es el que estas viendo. Aca vas a poder mis otros proyectos y saber de mi
+            </p>
+            <ul class="card-project__tags">
+              <li>HTML</li>
+              <li>CSS</li>
+              <li>Bootstrap</li>
+            </ul>
+            <div class="card-project__links">
+              <a href="https://github.com/Elpapu1114/Portfolio" target="_blank" rel="noopener">Ver github <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <section id="habilidades" class="section">
+      <p class="eyebrow"><span class="eyebrow__dot"></span> Habilidades</p>
+      <h2 class="section__title">Con qué trabajo</h2>
+
+      <div class="skills">
+        <div class="skill-chip"><i class="fa-brands fa-html5"></i> HTML</div>
+        <div class="skill-chip"><i class="fa-brands fa-css3-alt"></i> CSS</div>
+        <div class="skill-chip"><i class="fa-brands fa-bootstrap"></i> Bootstrap</div>
+        <div class="skill-chip"><i class="fa-brands fa-github"></i> GitHub</div>
+        <div class="skill-chip"><i class="fa-brands fa-python"></i> Python</div>
+      </div>
+    </section>
+
+    <div class="section-divider" aria-hidden="true"></div>
+
+    <section id="contacto" class="section section--alt">
+      <p class="eyebrow"><span class="eyebrow__dot"></span> Contacto</p>
+      <h2 class="section__title">Contactame</h2>
+
+      <div class="contact">
+        <div class="contact__info">
+          <p>¿Queres hablar conmigo o que te ayude en algo? Escribime</p>
+          <ul class="contact__socials">
+            <li><a href="mailto:mmanemazzieri@alumno.huergo.edu.ar"><i class="fa-solid fa-envelope"></i> mmanemazzieri@alumno.huergo.edu.ar</a></li>
+            <li><a href="https://github.com/" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> github.com/ElPapu1114</a></li>
+            <li><a href="https://www.instagram.com/" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i> https://www.instagram.com/manu.m.mazz/</a></li>
+          </ul>
+        </div>
+
+        <form class="contact__form" action="#" method="post">
+          <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre" name="nombre" required>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+          <div class="mb-3">
+            <label for="mensaje" class="form-label">Mensaje</label>
+            <textarea class="form-control" id="mensaje" name="mensaje" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-custom-bs">Enviar mensaje</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2026 Manuel Mañé Mazzieri. Hecho con HTML, CSS y bootstrap.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    const icon = toggleBtn.querySelector('i');
+
+    toggleBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      const isLight = document.body.classList.contains('light-mode');
+      icon.classList.toggle('fa-moon', !isLight);
+      icon.classList.toggle('fa-sun', isLight);
+    });
+
+    const navbar = document.getElementById('navbar');
+    const progressBar = document.getElementById('scroll-progress');
+
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('navbar--scrolled', window.scrollY > 30);
+
+      const scrollTotal = document.documentElement.scrollHeight - window.innerHeight;
+      const progreso = scrollTotal > 0 ? (window.scrollY / scrollTotal) * 100 : 0;
+      progressBar.style.width = progreso + '%';
+    });
+  </script>
+
+</body>
+</html>
