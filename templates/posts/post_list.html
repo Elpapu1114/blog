@@ -11,29 +11,57 @@
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="/">MMM<span>_</span></a>
+    <a class="brand" href="/" aria-label="Manuel Mañé Mazzieri, portfolio">
+      <span class="brand-mark">MMM<span>_</span></span>
+      <span class="brand-caption">PORTFOLIO / BLOG</span>
+    </a>
     <nav aria-label="Navegación principal">
-      <a href="/">Portfolio</a>
-      <a class="active" href="{% url 'post_list' %}">Blog</a>
-      <a href="/admin/">Administración</a>
+      <a class="nav-link nav-link--current" href="{% url 'post_list' %}" aria-current="page">Blog</a>
+      <a class="nav-link nav-link--admin" href="/admin/">Administración</a>
+      <a class="button button--return" href="/" aria-label="Volver al portfolio"><span aria-hidden="true">←</span> Volver al portfolio</a>
     </nav>
   </header>
   <main class="wrap">
-    <p class="eyebrow">// notas, proyectos y aprendizajes</p>
-    <h1>El blog<span>.</span></h1>
-    <p class="intro">Ideas y experiencias de mi camino en la programación.</p>
+    <section class="page-heading" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span> Notas, proyectos y aprendizajes</p>
+        <h1 id="page-title">El blog<span>.</span></h1>
+        <p class="intro">Ideas y experiencias de mi camino en la programación.</p>
+      </div>
+      <p class="section-index"><span>01</span> / CUADERNO DIGITAL</p>
+    </section>
+
+    <section class="post-list" aria-label="Entradas del blog">
     {% for post in posts %}
       <article class="post-card">
-        <p class="post-date">{{ post.published_at|date:"d \d\e F \d\e Y" }}</p>
-        <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
-        <p class="excerpt">{{ post.body|truncatewords:36|linebreaksbr }}</p>
-        {% if post.media %}<a class="read-more" href="{{ post.get_absolute_url }}">Ver entrada y multimedia <span aria-hidden="true">→</span></a>{% endif %}
-        {% if not post.media %}<a class="read-more" href="{{ post.get_absolute_url }}">Leer entrada <span aria-hidden="true">→</span></a>{% endif %}
+        <span class="post-number" aria-hidden="true">{{ forloop.counter|stringformat:"02d" }}</span>
+        <div class="post-card__content">
+          <div class="post-meta">
+            <time datetime="{{ post.published_at|date:'c' }}">{{ post.published_at|date:"d \d\e F \d\e Y" }}</time>
+            {% if post.media %}<span class="post-media-label">Incluye multimedia</span>{% endif %}
+          </div>
+          <h2><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h2>
+          <p class="excerpt">{{ post.body|truncatewords:36|linebreaksbr }}</p>
+          <a class="read-more" href="{{ post.get_absolute_url }}">
+            {% if post.media %}Ver entrada y multimedia{% else %}Leer entrada{% endif %}
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
       </article>
     {% empty %}
-      <p class="empty-state">Todavía no hay entradas. Pronto voy a publicar la primera.</p>
+      <div class="empty-state" role="status">
+        <span class="empty-state__mark" aria-hidden="true">01</span>
+        <div>
+          <h2>Todavía no hay entradas</h2>
+          <p>Este espacio está listo para las próximas ideas, proyectos y aprendizajes.</p>
+        </div>
+      </div>
     {% endfor %}
+    </section>
   </main>
-  <footer class="site-footer"><a href="/">Volver al portfolio</a></footer>
+  <footer class="site-footer">
+    <span>Manuel Mañé Mazzieri <span class="footer-mark">/</span> Buenos Aires, Argentina</span>
+    <a href="/">Volver al portfolio <span aria-hidden="true">↑</span></a>
+  </footer>
 </body>
 </html>

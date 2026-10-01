@@ -11,13 +11,19 @@
 </head>
 <body>
   <header class="site-header">
-    <a class="brand" href="/">MMM<span>_</span></a>
-    <nav aria-label="Navegación principal"><a href="/">Portfolio</a><a class="active" href="{% url 'post_list' %}">Blog</a></nav>
+    <a class="brand" href="/" aria-label="Manuel Mañé Mazzieri, portfolio">
+      <span class="brand-mark">MMM<span>_</span></span>
+      <span class="brand-caption">PORTFOLIO / BLOG</span>
+    </a>
+    <nav aria-label="Navegación principal">
+      <a class="nav-link nav-link--current" href="{% url 'post_list' %}" aria-current="page">Blog</a>
+      <a class="button button--return" href="/" aria-label="Volver al portfolio"><span aria-hidden="true">←</span> Volver al portfolio</a>
+    </nav>
   </header>
   <main class="wrap article-wrap">
-    <a class="back-link" href="{% url 'post_list' %}">← Todas las entradas</a>
+    <a class="back-link" href="{% url 'post_list' %}"><span aria-hidden="true">←</span> Todas las entradas</a>
     <article class="article">
-      <p class="eyebrow">{{ post.published_at|date:"d \d\e F \d\e Y" }}</p>
+      <p class="eyebrow"><span class="eyebrow__dot" aria-hidden="true"></span> Publicado el {{ post.published_at|date:"d \d\e F \d\e Y" }}</p>
       <h1>{{ post.title }}</h1>
       <div class="article-body">{{ post.body|linebreaks }}</div>
       {% if post.media %}
@@ -37,25 +43,43 @@
       {% endif %}
     </article>
     <section class="comments" aria-labelledby="comments-title">
-      <h2 id="comments-title">Comentarios <span>({{ comments|length }})</span></h2>
+      <div class="comments-heading">
+        <div>
+          <p class="eyebrow">Conversación</p>
+          <h2 id="comments-title">Comentarios <span>{{ comments|length }}</span></h2>
+        </div>
+      </div>
       {% for comment in comments %}
-        <article class="comment"><p class="comment-meta">{{ comment.name }} · {{ comment.created_at|date:"d/m/Y H:i" }}</p><p>{{ comment.body|linebreaksbr }}</p></article>
+        <article class="comment">
+          <p class="comment-meta"><strong>{{ comment.name }}</strong><time datetime="{{ comment.created_at|date:'c' }}">{{ comment.created_at|date:"d/m/Y · H:i" }}</time></p>
+          <p>{{ comment.body|linebreaksbr }}</p>
+        </article>
       {% empty %}
-        <p class="muted">Todavía no hay comentarios.</p>
+        <p class="comments-empty">Todavía no hay comentarios. La conversación empieza acá.</p>
       {% endfor %}
       <form class="comment-form" method="post">
         {% csrf_token %}
-        <h3>Dejá tu comentario</h3>
-        {% for message in messages %}<p class="notice">{{ message }}</p>{% endfor %}
+        <div class="form-heading">
+          <p class="eyebrow">Tu respuesta</p>
+          <h3>Dejá un comentario</h3>
+        </div>
+        {% for message in messages %}<p class="notice" role="status">{{ message }}</p>{% endfor %}
         {{ form.non_field_errors }}
-        <label for="{{ form.name.id_for_label }}">Nombre</label>
-        {{ form.name }}{{ form.name.errors }}
-        <label for="{{ form.body.id_for_label }}">Comentario</label>
-        {{ form.body }}{{ form.body.errors }}
-        <button type="submit">Enviar comentario</button>
+        <div class="form-field">
+          <label for="{{ form.name.id_for_label }}">Nombre</label>
+          {{ form.name }}{{ form.name.errors }}
+        </div>
+        <div class="form-field">
+          <label for="{{ form.body.id_for_label }}">Comentario</label>
+          {{ form.body }}{{ form.body.errors }}
+        </div>
+        <button class="button button--submit" type="submit">Enviar comentario <span aria-hidden="true">↗</span></button>
       </form>
     </section>
   </main>
-  <footer class="site-footer"><a href="/">Volver al portfolio</a></footer>
+  <footer class="site-footer">
+    <span>Manuel Mañé Mazzieri <span class="footer-mark">/</span> Buenos Aires, Argentina</span>
+    <a href="/">Volver al portfolio <span aria-hidden="true">↑</span></a>
+  </footer>
 </body>
 </html>
