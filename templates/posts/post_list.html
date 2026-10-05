@@ -1,26 +1,8 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Blog | Manuel Mañé Mazzieri</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'blog.css' %}">
-</head>
-<body>
-  <header class="site-header">
-    <a class="brand" href="/" aria-label="Manuel Mañé Mazzieri, portfolio">
-      <span class="brand-mark">MMM<span>_</span></span>
-      <span class="brand-caption">PORTFOLIO / BLOG</span>
-    </a>
-    <nav aria-label="Navegación principal">
-      <a class="nav-link nav-link--current" href="{% url 'post_list' %}" aria-current="page">Blog</a>
-      <a class="nav-link nav-link--admin" href="/admin/">Administración</a>
-      <a class="button button--return" href="/" aria-label="Volver al portfolio"><span aria-hidden="true">←</span> Volver al portfolio</a>
-    </nav>
-  </header>
+{% extends "base.html" %}
+
+{% block title %}Blog | Manuel Mañé Mazzieri{% endblock %}
+
+{% block content %}
   <main class="wrap">
     <section class="page-heading" aria-labelledby="page-title">
       <div>
@@ -59,9 +41,4 @@
     {% endfor %}
     </section>
   </main>
-  <footer class="site-footer">
-    <span>Manuel Mañé Mazzieri <span class="footer-mark">/</span> Buenos Aires, Argentina</span>
-    <a href="/">Volver al portfolio <span aria-hidden="true">↑</span></a>
-  </footer>
-</body>
-</html>
+{% endblock %}
