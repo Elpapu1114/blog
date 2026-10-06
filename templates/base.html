@@ -5,9 +5,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{% block title %}Blog | Manuel Mañé Mazzieri{% endblock %}</title>
+  <link rel="icon" type="image/jpeg" href="{% static 'assets/mmmlogo.jpg' %}">
+  <script>
+    if (localStorage.getItem('portfolio-theme') === 'light') {
+      document.documentElement.classList.add('light-mode');
+    }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+  <link rel="stylesheet" href="{% static 'css/blog.css' %}?v=2">
 </head>
 <body>
   <header class="site-header">
@@ -19,6 +25,9 @@
       <a class="nav-link nav-link--current" href="{% url 'post_list' %}">Blog</a>
       <a class="nav-link nav-link--admin" href="/admin/">Administración</a>
       <a class="button button--return" href="/" aria-label="Volver al portfolio"><span aria-hidden="true">←</span> Volver al portfolio</a>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar a modo claro" title="Cambiar a modo claro">
+        <span class="theme-toggle__icon" aria-hidden="true">☾</span>
+      </button>
     </nav>
   </header>
   {% block content %}{% endblock %}
@@ -26,5 +35,31 @@
     <span>Manuel Mañé Mazzieri <span class="footer-mark">/</span> Buenos Aires, Argentina</span>
     <a href="/">Volver al portfolio <span aria-hidden="true">↑</span></a>
   </footer>
+  <script>
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = themeToggle.querySelector('.theme-toggle__icon');
+
+    const applyTheme = (isLight) => {
+      document.documentElement.classList.toggle('light-mode', isLight);
+      document.body.classList.toggle('light-mode', isLight);
+      themeIcon.textContent = isLight ? '☀' : '☾';
+      themeToggle.setAttribute('aria-pressed', String(isLight));
+      themeToggle.setAttribute('aria-label', `Cambiar a modo ${isLight ? 'oscuro' : 'claro'}`);
+      themeToggle.title = `Cambiar a modo ${isLight ? 'oscuro' : 'claro'}`;
+    };
+
+    applyTheme(localStorage.getItem('portfolio-theme') === 'light');
+    themeToggle.addEventListener('click', () => {
+      const isLight = !document.documentElement.classList.contains('light-mode');
+      localStorage.setItem('portfolio-theme', isLight ? 'light' : 'dark');
+      applyTheme(isLight);
+    });
+
+    window.addEventListener('storage', (event) => {
+      if (event.key === 'portfolio-theme') {
+        applyTheme(localStorage.getItem('portfolio-theme') === 'light');
+      }
+    });
+  </script>
 </body>
 </html>
