@@ -1,0 +1,12 @@
+Este trabajo fue realizado en 4 clases:
+
+En la primera clase hice lo basico que fue conectar mi portfolio al blog mediante Django. 
+Pero al finalizar la clase me di cuenta que no sabia ben como seguir asi que borre todo lo que hice en el dia
+
+En la segunda clase empece de 0 usando otra forma que se me hizo mucho mas facil que la primera.
+Luego estuve haciendo la pagina conectando todo, agregando el blog al portfolio con los botones y otras cosas.
+
+En la tercera clase lo que hice fue modularizar el proyecto como el profe dijo.
+
+En la cuarta y ultima clase lo que hice fue agregar el boton de modo claro y oscuro al blog haciendo que si en uno esta en claro en el otro tambien.
+Luego para terminar hice el readme y la bitacora.
