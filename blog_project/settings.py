@@ -1,10 +1,16 @@
+import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Ruta donde se recolectarán los archivos para producción 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
+# URL pública para acceder a estos archivos en el navegador 
+STATIC_URL = '/static/'
+
 SECRET_KEY = "django-insecure-blog-local-development-only"
 DEBUG = True
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost", "Elpapardo.pythonanywhere.com"]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
